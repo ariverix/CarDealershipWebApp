@@ -9,6 +9,9 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listens for domain events published by the REST service and logs them for auditing purposes.
+ */
 @Component
 public class EventListener {
 

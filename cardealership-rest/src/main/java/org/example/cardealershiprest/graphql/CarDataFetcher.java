@@ -4,9 +4,9 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import org.example.apicontract.dto.*;
+import org.example.apicontract.dto.CarRequest;
+import org.example.apicontract.dto.CarResponse;
 import org.example.cardealershiprest.service.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,6 @@ public class CarDataFetcher {
 
     private final CarService carService;
 
-    @Autowired
     public CarDataFetcher(CarService carService) {
         this.carService = carService;
     }

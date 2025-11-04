@@ -4,9 +4,9 @@ import org.example.apicontract.dto.CustomerRequest;
 import org.example.apicontract.dto.CustomerResponse;
 import org.example.apicontract.dto.StatusResponse;
 import org.example.apicontract.exception.ResourceNotFoundException;
-import org.example.eventscontract.events.CustomerRegisteredEvent;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Customer;
+import org.example.eventscontract.events.CustomerRegisteredEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -33,47 +33,46 @@ public class CustomerService {
     }
 
     public CustomerResponse getCustomerById(Long id) {
-        Customer c = customers.stream()
+        Customer customer = customers.stream()
                 .filter(it -> it.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Клиент", id));
-        return toResponse(c);
+        return toResponse(customer);
     }
 
     public CustomerResponse createCustomer(CustomerRequest request) {
-        Customer c = new Customer(
+        Customer customer = new Customer(
                 idCounter.getAndIncrement(),
                 request.firstName(),
                 request.lastName(),
                 request.phone(),
                 request.email()
         );
-        customers.add(c);
+        customers.add(customer);
 
-        // 🔹 Отправляем событие CustomerRegisteredEvent
-        var event = new CustomerRegisteredEvent(c.getId(), c.getFirstName(), c.getLastName(), c.getPhone());
+        var event = new CustomerRegisteredEvent(customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getPhone());
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,
                 RabbitMQConfig.RK_CUSTOMER_REGISTERED,
                 event
         );
 
-        return toResponse(c);
+        return toResponse(customer);
     }
 
     public StatusResponse deleteCustomer(Long id) {
-        Customer c = customers.stream()
+        Customer customer = customers.stream()
                 .filter(it -> it.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Клиент", id));
-        customers.remove(c);
+        customers.remove(customer);
         return new StatusResponse("success", "Клиент удалён");
     }
 
-    private CustomerResponse toResponse(Customer c) {
+    private CustomerResponse toResponse(Customer customer) {
         return new CustomerResponse(
-                c.getId(), c.getFirstName(), c.getLastName(),
-                c.getPhone(), c.getEmail(), c.getRegisteredAt()
+                customer.getId(), customer.getFirstName(), customer.getLastName(),
+                customer.getPhone(), customer.getEmail(), customer.getRegisteredAt()
         );
     }
 }

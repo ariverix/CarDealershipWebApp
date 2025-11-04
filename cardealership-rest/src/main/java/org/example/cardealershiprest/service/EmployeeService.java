@@ -4,9 +4,9 @@ import org.example.apicontract.dto.EmployeeRequest;
 import org.example.apicontract.dto.EmployeeResponse;
 import org.example.apicontract.dto.StatusResponse;
 import org.example.apicontract.exception.ResourceNotFoundException;
-import org.example.eventscontract.events.EmployeeHiredEvent;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Employee;
+import org.example.eventscontract.events.EmployeeHiredEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -33,47 +33,46 @@ public class EmployeeService {
     }
 
     public EmployeeResponse getEmployeeById(Long id) {
-        Employee e = employees.stream()
+        Employee employee = employees.stream()
                 .filter(it -> it.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Сотрудник", id));
-        return toResponse(e);
+        return toResponse(employee);
     }
 
     public EmployeeResponse createEmployee(EmployeeRequest request) {
-        Employee e = new Employee(
+        Employee employee = new Employee(
                 idCounter.getAndIncrement(),
                 request.firstName(),
                 request.lastName(),
                 request.position(),
                 request.email()
         );
-        employees.add(e);
+        employees.add(employee);
 
-        // 🔹 Отправляем событие EmployeeHiredEvent
-        var event = new EmployeeHiredEvent(e.getId(), e.getFirstName(), e.getLastName(), e.getPosition());
+        var event = new EmployeeHiredEvent(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getPosition());
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,
                 RabbitMQConfig.RK_EMPLOYEE_HIRED,
                 event
         );
 
-        return toResponse(e);
+        return toResponse(employee);
     }
 
     public StatusResponse deleteEmployee(Long id) {
-        Employee e = employees.stream()
+        Employee employee = employees.stream()
                 .filter(it -> it.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Сотрудник", id));
-        employees.remove(e);
+        employees.remove(employee);
         return new StatusResponse("success", "Сотрудник удалён");
     }
 
-    private EmployeeResponse toResponse(Employee e) {
+    private EmployeeResponse toResponse(Employee employee) {
         return new EmployeeResponse(
-                e.getId(), e.getFirstName(), e.getLastName(),
-                e.getPosition(), e.getEmail(), e.getHiredAt()
+                employee.getId(), employee.getFirstName(), employee.getLastName(),
+                employee.getPosition(), employee.getEmail(), employee.getHiredAt()
         );
     }
 }

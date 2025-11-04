@@ -11,8 +11,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
-
 @RestController
 public class EmployeeController implements EmployeeApi {
 
@@ -26,10 +24,7 @@ public class EmployeeController implements EmployeeApi {
 
     @Override
     public CollectionModel<EntityModel<EmployeeResponse>> getAllEmployees() {
-        var models = employeeService.getAllEmployees().stream()
-                .map(employeeAssembler::toModel)
-                .collect(Collectors.toList());
-        return employeeAssembler.toCollectionModel(models.stream().map(EntityModel::getContent).toList());
+        return employeeAssembler.toCollectionModel(employeeService.getAllEmployees());
     }
 
     @Override

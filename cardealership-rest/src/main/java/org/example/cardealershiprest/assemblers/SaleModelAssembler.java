@@ -5,11 +5,13 @@ import org.example.cardealershiprest.controller.CarController;
 import org.example.cardealershiprest.controller.CustomerController;
 import org.example.cardealershiprest.controller.EmployeeController;
 import org.example.cardealershiprest.controller.SaleController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class SaleModelAssembler implements RepresentationModelAssembler<SaleResponse, EntityModel<SaleResponse>> {
@@ -24,5 +26,11 @@ public class SaleModelAssembler implements RepresentationModelAssembler<SaleResp
                 linkTo(methodOn(CustomerController.class).getCustomerById(sale.getCustomer().getId())).withRel("customer"),
                 linkTo(methodOn(EmployeeController.class).getEmployeeById(sale.getEmployee().getId())).withRel("employee")
         );
+    }
+
+    @Override
+    public CollectionModel<EntityModel<SaleResponse>> toCollectionModel(Iterable<? extends SaleResponse> sales) {
+        return RepresentationModelAssembler.super.toCollectionModel(sales)
+                .add(linkTo(methodOn(SaleController.class).getAllSales()).withSelfRel());
     }
 }

@@ -10,8 +10,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
-
 @RestController
 public class CarController implements CarApi {
 
@@ -25,10 +23,7 @@ public class CarController implements CarApi {
 
     @Override
     public CollectionModel<EntityModel<CarResponse>> getAllCars() {
-        var models = carService.getAllCars().stream()
-                .map(carAssembler::toModel)
-                .collect(Collectors.toList());
-        return carAssembler.toCollectionModel(models.stream().map(EntityModel::getContent).toList());
+        return carAssembler.toCollectionModel(carService.getAllCars());
     }
 
     @Override

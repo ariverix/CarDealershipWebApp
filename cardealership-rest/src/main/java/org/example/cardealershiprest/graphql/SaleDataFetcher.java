@@ -1,11 +1,19 @@
 package org.example.cardealershiprest.graphql;
 
-import com.netflix.graphql.dgs.*;
+import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsData;
+import com.netflix.graphql.dgs.DgsMutation;
+import com.netflix.graphql.dgs.DgsQuery;
+import com.netflix.graphql.dgs.InputArgument;
 import graphql.schema.DataFetchingEnvironment;
-import org.example.apicontract.dto.*;
+import org.example.apicontract.dto.CarResponse;
+import org.example.apicontract.dto.CustomerResponse;
+import org.example.apicontract.dto.EmployeeResponse;
+import org.example.apicontract.dto.SaleRequest;
+import org.example.apicontract.dto.SaleResponse;
 import org.example.cardealershiprest.service.SaleService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +22,6 @@ public class SaleDataFetcher {
 
     private final SaleService saleService;
 
-    @Autowired
     public SaleDataFetcher(SaleService saleService) {
         this.saleService = saleService;
     }
@@ -36,7 +43,7 @@ public class SaleDataFetcher {
                 Long.parseLong(input.get("customerId").toString()),
                 Long.parseLong(input.get("employeeId").toString()),
                 ((Number) input.get("salePrice")).doubleValue(),
-                java.time.LocalDate.parse((String) input.get("saleDate"))
+                LocalDate.parse((String) input.get("saleDate"))
         );
         return saleService.createSale(request);
     }

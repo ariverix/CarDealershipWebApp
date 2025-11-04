@@ -2,13 +2,12 @@ package org.example.cardealershiprest.service;
 
 import org.example.apicontract.dto.CarRequest;
 import org.example.apicontract.dto.CarResponse;
-import org.example.apicontract.dto.StatusResponse;
 import org.example.apicontract.exception.DuplicateResourceException;
 import org.example.apicontract.exception.InvalidOperationException;
 import org.example.apicontract.exception.ResourceNotFoundException;
-import org.example.eventscontract.events.CarAddedEvent;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Car;
+import org.example.eventscontract.events.CarAddedEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +43,7 @@ public class CarService {
             return getAllCars();
         }
         return cars.stream()
-                .filter(c -> c.getCategory() != null &&
-                        c.getCategory().equalsIgnoreCase(categoryFilter))
+                .filter(c -> c.getCategory() != null && c.getCategory().equalsIgnoreCase(categoryFilter))
                 .map(this::toResponse)
                 .toList();
     }
@@ -56,8 +54,9 @@ public class CarService {
 
     public CarResponse createCar(CarRequest request) {
         boolean vinExists = cars.stream().anyMatch(c -> c.getVin().equals(request.vin()));
-        if (vinExists)
+        if (vinExists) {
             throw new DuplicateResourceException("Автомобиль", "VIN", request.vin());
+        }
 
         Car car = new Car(idCounter.getAndIncrement(),
                 request.brand(), request.model(), request.year(), request.price(), request.vin());
@@ -78,12 +77,14 @@ public class CarService {
 
     public CarResponse updateCar(Long id, CarRequest request) {
         Car car = findCarById(id);
-        if (car.isSold())
+        if (car.isSold()) {
             throw new InvalidOperationException("Нельзя обновить проданный автомобиль");
+        }
 
         if (!car.getVin().equals(request.vin()) &&
-                cars.stream().anyMatch(c -> c.getVin().equals(request.vin())))
+                cars.stream().anyMatch(c -> c.getVin().equals(request.vin()))) {
             throw new DuplicateResourceException("Автомобиль", "VIN", request.vin());
+        }
 
         car.setBrand(request.brand());
         car.setModel(request.model());
@@ -93,17 +94,19 @@ public class CarService {
         return toResponse(car);
     }
 
-    public StatusResponse deleteCar(Long id) {
+    public void deleteCar(Long id) {
         Car car = findCarById(id);
-        if (car.isSold())
+        if (car.isSold()) {
             throw new InvalidOperationException("Нельзя удалить проданный автомобиль");
+        }
         cars.remove(car);
-        return new StatusResponse("success", "Автомобиль удалён");
     }
 
     public void markAsSold(Long carId) {
         Car car = findCarById(carId);
-        if (car.isSold()) throw new InvalidOperationException("Автомобиль уже продан");
+        if (car.isSold()) {
+            throw new InvalidOperationException("Автомобиль уже продан");
+        }
         car.setSold(true);
     }
 

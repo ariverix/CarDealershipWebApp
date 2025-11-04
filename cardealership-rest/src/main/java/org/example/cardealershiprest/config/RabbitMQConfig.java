@@ -14,6 +14,10 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Centralised RabbitMQ configuration for the REST gateway.
+ * Declares the exchange, queues, bindings and a JSON message converter that keeps date/time values readable.
+ */
 @Configuration
 public class RabbitMQConfig {
 
@@ -27,7 +31,6 @@ public class RabbitMQConfig {
     public static final String RK_CAR_ADDED = "car.added";
     public static final String RK_CUSTOMER_REGISTERED = "customer.registered";
     public static final String RK_EMPLOYEE_HIRED = "employee.hired";
-
 
     @Bean
     public TopicExchange exchange() {
@@ -56,10 +59,10 @@ public class RabbitMQConfig {
 
     @Bean
     public Jackson2JsonMessageConverter converter() {
-        ObjectMapper m = new ObjectMapper();
-        m.registerModule(new JavaTimeModule());
-        m.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        return new Jackson2JsonMessageConverter(m);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        return new Jackson2JsonMessageConverter(mapper);
     }
 
     @Bean
@@ -69,9 +72,9 @@ public class RabbitMQConfig {
 
     @Bean
     public RabbitTemplate template(ConnectionFactory factory, Jackson2JsonMessageConverter converter) {
-        RabbitTemplate t = new RabbitTemplate(factory);
-        t.setExchange(EXCHANGE_NAME);
-        t.setMessageConverter(converter);
-        return t;
+        RabbitTemplate template = new RabbitTemplate(factory);
+        template.setExchange(EXCHANGE_NAME);
+        template.setMessageConverter(converter);
+        return template;
     }
 }

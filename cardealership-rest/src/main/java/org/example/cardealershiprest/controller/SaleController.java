@@ -11,8 +11,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
-
 @RestController
 public class SaleController implements SaleApi {
 
@@ -26,11 +24,7 @@ public class SaleController implements SaleApi {
 
     @Override
     public CollectionModel<EntityModel<SaleResponse>> getAllSales() {
-        var models = saleService.getAllSales().stream()
-                .map(saleAssembler::toModel)
-                .collect(Collectors.toList());
-
-        return CollectionModel.of(models);
+        return saleAssembler.toCollectionModel(saleService.getAllSales());
     }
 
     @Override
