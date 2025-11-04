@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="events-contract" />
+        <module name="api-contract" />
+        <module name="audit-service" />
+        <module name="cardealership-rest" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CarDealershipWebApp" target="25" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-contract" options="-parameters" />
+      <module name="audit-service" options="-parameters" />
+      <module name="cardealership-rest" options="-parameters" />
+      <module name="events-contract" options="-parameters" />
+    </option>
+  </component>
+</project>

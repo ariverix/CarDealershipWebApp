@@ -1,0 +1,115 @@
+type Car {
+    id: ID!
+    brand: String
+    model: String
+    year: Int
+    price: Float
+    vin: String
+    sold: Boolean
+    category: String
+    createdAt: String
+}
+
+type Customer {
+    id: ID!
+    firstName: String
+    lastName: String
+    phone: String
+    email: String
+    registeredAt: String
+}
+
+type Employee {
+    id: ID!
+    firstName: String
+    lastName: String
+    position: String
+    email: String
+    hiredAt: String
+}
+
+type Sale {
+    id: ID!
+    car: Car
+    customer: Customer
+    employee: Employee
+    salePrice: Float
+    saleDate: String
+}
+
+
+type Query {
+    # Получить список всех автомобилей с фильтром по категории
+    cars(categoryFilter: String): [Car]
+
+    # Получить автомобиль по ID
+    carById(id: ID!): Car
+
+    # Получить всех клиентов
+    customers: [Customer]
+
+    # Получить клиента по ID
+    customerById(id: ID!): Customer
+
+    # Получить всех сотрудников
+    employees: [Employee]
+
+    # Получить сотрудника по ID
+    employeeById(id: ID!): Employee
+
+    # Получить все продажи
+    sales: [Sale]
+
+    # Получить продажу по ID
+    saleById(id: ID!): Sale
+}
+
+
+input CarInput {
+    brand: String!
+    model: String!
+    year: Int!
+    price: Float!
+    vin: String!
+}
+
+input CustomerInput {
+    firstName: String!
+    lastName: String!
+    phone: String!
+    email: String!
+}
+
+input EmployeeInput {
+    firstName: String!
+    lastName: String!
+    position: String!
+    email: String!
+}
+
+input SaleInput {
+    carId: ID!
+    customerId: ID!
+    employeeId: ID!
+    salePrice: Float!
+    saleDate: String!
+}
+
+
+type Mutation {
+    createCar(input: CarInput!): Car
+    updateCar(id: ID!, input: CarInput!): Car
+    deleteCar(id: ID!): ID
+
+    # Работа с клиентами
+    createCustomer(input: CustomerInput!): Customer
+    deleteCustomer(id: ID!): ID
+
+    # Работа с сотрудниками
+    createEmployee(input: EmployeeInput!): Employee
+    deleteEmployee(id: ID!): ID
+
+    # Работа с продажами
+    createSale(input: SaleInput!): Sale
+    deleteSale(id: ID!): ID
+}
