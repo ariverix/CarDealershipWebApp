@@ -8,7 +8,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class CustomerModelAssembler implements RepresentationModelAssembler<CustomerResponse, EntityModel<CustomerResponse>> {
@@ -25,7 +26,7 @@ public class CustomerModelAssembler implements RepresentationModelAssembler<Cust
 
     @Override
     public CollectionModel<EntityModel<CustomerResponse>> toCollectionModel(Iterable<? extends CustomerResponse> customers) {
-        return RepresentationModelAssembler.super.toCollectionModel(customers)
-                .add(linkTo(methodOn(CustomerController.class).getAllCustomers()).withSelfRel());
+        var collection = RepresentationModelAssembler.super.toCollectionModel(customers);
+        return collection.add(linkTo(methodOn(CustomerController.class).getAllCustomers()).withSelfRel());
     }
 }

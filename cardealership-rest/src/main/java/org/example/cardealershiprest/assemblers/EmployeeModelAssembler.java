@@ -8,7 +8,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class EmployeeModelAssembler implements RepresentationModelAssembler<EmployeeResponse, EntityModel<EmployeeResponse>> {
@@ -25,7 +26,7 @@ public class EmployeeModelAssembler implements RepresentationModelAssembler<Empl
 
     @Override
     public CollectionModel<EntityModel<EmployeeResponse>> toCollectionModel(Iterable<? extends EmployeeResponse> employees) {
-        return RepresentationModelAssembler.super.toCollectionModel(employees)
-                .add(linkTo(methodOn(EmployeeController.class).getAllEmployees()).withSelfRel());
+        var collection = RepresentationModelAssembler.super.toCollectionModel(employees);
+        return collection.add(linkTo(methodOn(EmployeeController.class).getAllEmployees()).withSelfRel());
     }
 }

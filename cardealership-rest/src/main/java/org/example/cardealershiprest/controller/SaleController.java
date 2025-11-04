@@ -11,7 +11,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class SaleController implements SaleApi {
@@ -26,11 +27,12 @@ public class SaleController implements SaleApi {
 
     @Override
     public CollectionModel<EntityModel<SaleResponse>> getAllSales() {
-        var models = saleService.getAllSales().stream()
+        var items = saleService.getAllSales().stream()
                 .map(saleAssembler::toModel)
-                .collect(Collectors.toList());
+                .toList();
 
-        return CollectionModel.of(models);
+        return CollectionModel.of(items)
+                .add(linkTo(methodOn(SaleController.class).getAllSales()).withSelfRel());
     }
 
     @Override

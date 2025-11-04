@@ -11,8 +11,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
-
 @RestController
 public class CustomerController implements CustomerApi {
 
@@ -26,10 +24,7 @@ public class CustomerController implements CustomerApi {
 
     @Override
     public CollectionModel<EntityModel<CustomerResponse>> getAllCustomers() {
-        var models = customerService.getAllCustomers().stream()
-                .map(customerAssembler::toModel)
-                .collect(Collectors.toList());
-        return customerAssembler.toCollectionModel(models.stream().map(EntityModel::getContent).toList());
+        return customerAssembler.toCollectionModel(customerService.getAllCustomers());
     }
 
     @Override

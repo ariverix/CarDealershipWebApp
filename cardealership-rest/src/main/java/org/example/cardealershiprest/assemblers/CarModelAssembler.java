@@ -1,6 +1,5 @@
 package org.example.cardealershiprest.assemblers;
 
-
 import org.example.apicontract.dto.CarResponse;
 import org.example.cardealershiprest.controller.CarController;
 import org.example.cardealershiprest.controller.SaleController;
@@ -9,7 +8,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class CarModelAssembler implements RepresentationModelAssembler<CarResponse, EntityModel<CarResponse>> {
@@ -26,7 +26,7 @@ public class CarModelAssembler implements RepresentationModelAssembler<CarRespon
 
     @Override
     public CollectionModel<EntityModel<CarResponse>> toCollectionModel(Iterable<? extends CarResponse> cars) {
-        return RepresentationModelAssembler.super.toCollectionModel(cars)
-                .add(linkTo(methodOn(CarController.class).getAllCars()).withSelfRel());
+        var collection = RepresentationModelAssembler.super.toCollectionModel(cars);
+        return collection.add(linkTo(methodOn(CarController.class).getAllCars()).withSelfRel());
     }
 }

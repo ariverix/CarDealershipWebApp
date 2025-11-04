@@ -4,11 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15c0d041-8fc1-475b-b10c-d09b3eb183ca" name="Changes" comment="" />
+    <list default="true" id="15c0d041-8fc1-475b-b10c-d09b3eb183ca" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-contract/src/main/java/org/example/apicontract/endpoints/CarApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-contract/src/main/java/org/example/apicontract/endpoints/CarApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-contract/src/main/java/org/example/apicontract/exception/DuplicateResourceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-contract/src/main/java/org/example/apicontract/exception/DuplicateResourceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/CarModelAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/CarModelAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/CustomerModelAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/CustomerModelAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/EmployeeModelAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/EmployeeModelAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/SaleModelAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/SaleModelAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/config/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/config/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/RootController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/RootController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/SaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/controller/SaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/filters/PerformanceWarningFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardealership-rest/src/main/java/org/example/cardealershiprest/filters/PerformanceWarningFilter.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ariverix"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ariverix/CarDealershipWebApp.git",
+    "accountId": "4e19a09c-1ab4-4c4b-8be6-0eb00e10c95a"
+  }
+}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="vcs://C:/Users/chern/IdeaProjects/CarDealershipWebApp/api-contract/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="vcs://C:/Users/chern/IdeaProjects/CarDealershipWebApp/cardealership-rest/src/main/java/org/example/cardealershiprest/CardealershipRestApplication.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="vcs://C:/Users/chern/IdeaProjects/CarDealershipWebApp/cardealership-rest/src/main/java/org/example/cardealershiprest/assemblers/EmployeeModelAssembler.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -22,43 +58,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ApiContractApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-contract [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-contract [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.events-contract [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.events-contract [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiContractApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuditServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.CardealershipRestApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chern/IdeaProjects/CarDealershipWebApp/audit-service/lib&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/chern/IdeaProjects/CarDealershipWebApp/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.30574712&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ApiContractApplication.executor": "Run",
+    "Maven.api-contract [clean].executor": "Run",
+    "Maven.api-contract [install].executor": "Run",
+    "Maven.events-contract [clean].executor": "Run",
+    "Maven.events-contract [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ApiContractApplication.executor": "Run",
+    "Spring Boot.AuditServiceApplication.executor": "Run",
+    "Spring Boot.CardealershipRestApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chern/IdeaProjects/CarDealershipWebApp/audit-service/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/chern/IdeaProjects/CarDealershipWebApp/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30574712",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chern\IdeaProjects\CarDealershipWebApp\audit-service\lib" />
@@ -85,7 +123,6 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
-              <entry key="ApiContractApplication" value="STOPPED" />
               <entry key="AuditServiceApplication" value="STOPPED" />
               <entry key="CardealershipRestApplication" value="STOPPED" />
             </map>
@@ -95,26 +132,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.AuditServiceApplication">
-    <configuration name="ApiContractApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.apicontract.ApiContractApplication" />
-      <module name="api-contract" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.apicontract.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ApiContractApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="api-contract" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.apicontract.ApiContractApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AuditServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="audit-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.auditservice.AuditServiceApplication" />
@@ -136,18 +153,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventsContractApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="events-contract" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.eventscontract.EventsContractApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.ApiContractApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -166,10 +171,22 @@
       <updated>1762239001723</updated>
       <workItem from="1762239003431" duration="4340000" />
       <workItem from="1762243374857" duration="3000" />
+      <workItem from="1762274684085" duration="2078000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

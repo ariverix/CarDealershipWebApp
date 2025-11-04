@@ -14,7 +14,7 @@ import java.io.IOException;
 public class PerformanceWarningFilter implements Filter {
 
     private static final Logger log = LoggerFactory.getLogger(PerformanceWarningFilter.class);
-    private static final long THRESHOLD_MS = 20;
+    private static final long THRESHOLD_MS = 1000; // разумный порог
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -22,11 +22,13 @@ public class PerformanceWarningFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         long start = System.currentTimeMillis();
+
         chain.doFilter(req, res);
+
         long dur = System.currentTimeMillis() - start;
 
         if (dur > THRESHOLD_MS && request.getRequestURI().startsWith("/api/")) {
-            log.warn("Slow request detected: {} {} took {} ms",
+            log.warn("⚠️ Slow request detected: {} {} took {} ms",
                     request.getMethod(), request.getRequestURI(), dur);
         }
     }
