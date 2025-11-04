@@ -50,5 +50,5 @@ public interface CustomerApi {
                     content = @Content(schema = @Schema(implementation = StatusResponse.class)))
     })
     @DeleteMapping("/api/customers/{id}")
-    StatusResponse deleteCustomer(@PathVariable Long id);
+    ResponseEntity<EntityModel<StatusResponse>> deleteCustomer(@PathVariable Long id);
 }

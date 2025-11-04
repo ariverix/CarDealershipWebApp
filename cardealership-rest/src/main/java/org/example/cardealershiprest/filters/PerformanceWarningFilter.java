@@ -1,33 +1,39 @@
 package org.example.cardealershiprest.filters;
 
-import jakarta.servlet.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 @Component
 @Order(2)
-public class PerformanceWarningFilter implements Filter {
+public class PerformanceWarningFilter extends OncePerRequestFilter {
 
     private static final Logger log = LoggerFactory.getLogger(PerformanceWarningFilter.class);
     private static final long THRESHOLD_MS = 20;
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-            throws IOException, ServletException {
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return !request.getRequestURI().startsWith("/api/");
+    }
 
-        HttpServletRequest request = (HttpServletRequest) req;
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         long start = System.currentTimeMillis();
-        chain.doFilter(req, res);
-        long dur = System.currentTimeMillis() - start;
+        filterChain.doFilter(request, response);
+        long duration = System.currentTimeMillis() - start;
 
-        if (dur > THRESHOLD_MS && request.getRequestURI().startsWith("/api/")) {
+        if (duration > THRESHOLD_MS) {
             log.warn("Slow request detected: {} {} took {} ms",
-                    request.getMethod(), request.getRequestURI(), dur);
+                    request.getMethod(), request.getRequestURI(), duration);
         }
     }
 }

@@ -59,5 +59,5 @@ public interface CarApi {
                     content = @Content(schema = @Schema(implementation = StatusResponse.class)))
     })
     @DeleteMapping("/api/cars/{id}")
-    void deleteCar(@PathVariable Long id);
+    ResponseEntity<EntityModel<StatusResponse>> deleteCar(@PathVariable Long id);
 }

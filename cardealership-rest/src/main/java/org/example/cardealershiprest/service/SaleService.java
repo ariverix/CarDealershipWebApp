@@ -3,14 +3,16 @@ package org.example.cardealershiprest.service;
 import org.example.apicontract.dto.SaleRequest;
 import org.example.apicontract.dto.SaleResponse;
 import org.example.apicontract.dto.StatusResponse;
-import org.example.apicontract.exception.*;
-import org.example.eventscontract.events.SaleCreatedEvent;
-import org.example.eventscontract.events.SaleDeletedEvent;
+import org.example.apicontract.exception.DuplicateResourceException;
+import org.example.apicontract.exception.ResourceNotFoundException;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Sale;
+import org.example.eventscontract.events.SaleCreatedEvent;
+import org.example.eventscontract.events.SaleDeletedEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -32,9 +34,9 @@ public class SaleService {
         this.employeeService = employeeService;
         this.rabbitTemplate = rabbitTemplate;
 
-        Sale s = new Sale(idCounter.getAndIncrement(), 1L, 1L, 1L, 34000.0, java.time.LocalDate.now());
-        sales.add(s);
-        try { carService.markAsSold(1L); } catch (Exception ignored) {}
+        Sale seed = new Sale(idCounter.getAndIncrement(), 1L, 1L, 1L, 34000.0, LocalDate.now());
+        sales.add(seed);
+        carService.markAsSold(seed.getCarId());
     }
 
     public List<SaleResponse> getAllSales() {
@@ -53,6 +55,11 @@ public class SaleService {
         carService.getCarById(req.carId());
         customerService.getCustomerById(req.customerId());
         employeeService.getEmployeeById(req.employeeId());
+
+        boolean alreadySold = sales.stream().anyMatch(s -> s.getCarId().equals(req.carId()));
+        if (alreadySold) {
+            throw new DuplicateResourceException("Продажа", "carId", String.valueOf(req.carId()));
+        }
 
         Sale sale = new Sale(idCounter.getAndIncrement(), req.carId(), req.customerId(),
                 req.employeeId(), req.salePrice(), req.saleDate());

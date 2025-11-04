@@ -11,7 +11,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class CustomerController implements CustomerApi {
@@ -26,10 +27,7 @@ public class CustomerController implements CustomerApi {
 
     @Override
     public CollectionModel<EntityModel<CustomerResponse>> getAllCustomers() {
-        var models = customerService.getAllCustomers().stream()
-                .map(customerAssembler::toModel)
-                .collect(Collectors.toList());
-        return customerAssembler.toCollectionModel(models.stream().map(EntityModel::getContent).toList());
+        return customerAssembler.toCollectionModel(customerService.getAllCustomers());
     }
 
     @Override
@@ -45,7 +43,11 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public StatusResponse deleteCustomer(Long id) {
-        return customerService.deleteCustomer(id);
+    public ResponseEntity<EntityModel<StatusResponse>> deleteCustomer(Long id) {
+        StatusResponse status = customerService.deleteCustomer(id);
+        var model = EntityModel.of(status,
+                linkTo(methodOn(CustomerController.class).deleteCustomer(id)).withSelfRel(),
+                linkTo(methodOn(CustomerController.class).getAllCustomers()).withRel("collection"));
+        return ResponseEntity.ok(model);
     }
 }

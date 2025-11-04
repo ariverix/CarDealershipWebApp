@@ -50,5 +50,5 @@ public interface EmployeeApi {
                     content = @Content(schema = @Schema(implementation = StatusResponse.class)))
     })
     @DeleteMapping("/api/employees/{id}")
-    StatusResponse deleteEmployee(@PathVariable Long id);
+    ResponseEntity<EntityModel<StatusResponse>> deleteEmployee(@PathVariable Long id);
 }

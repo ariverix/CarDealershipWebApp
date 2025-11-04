@@ -21,7 +21,8 @@ public class RootController {
                 linkTo(methodOn(CustomerController.class).getAllCustomers()).withRel("customers"),
                 linkTo(methodOn(EmployeeController.class).getAllEmployees()).withRel("employees"),
                 linkTo(methodOn(SaleController.class).getAllSales()).withRel("sales"),
-                Link.of("/swagger-ui.html").withRel("documentation")
+                Link.of("/swagger-ui/index.html").withRel("documentation"),
+                Link.of("/graphiql").withRel("graphql")
         );
         return root;
     }

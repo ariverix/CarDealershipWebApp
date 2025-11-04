@@ -4,9 +4,9 @@ import org.example.apicontract.dto.CustomerRequest;
 import org.example.apicontract.dto.CustomerResponse;
 import org.example.apicontract.dto.StatusResponse;
 import org.example.apicontract.exception.ResourceNotFoundException;
-import org.example.eventscontract.events.CustomerRegisteredEvent;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Customer;
+import org.example.eventscontract.events.CustomerRegisteredEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,6 @@ public class CustomerService {
         );
         customers.add(c);
 
-        // 🔹 Отправляем событие CustomerRegisteredEvent
         var event = new CustomerRegisteredEvent(c.getId(), c.getFirstName(), c.getLastName(), c.getPhone());
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,

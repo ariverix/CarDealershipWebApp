@@ -4,9 +4,9 @@ import org.example.apicontract.dto.EmployeeRequest;
 import org.example.apicontract.dto.EmployeeResponse;
 import org.example.apicontract.dto.StatusResponse;
 import org.example.apicontract.exception.ResourceNotFoundException;
-import org.example.eventscontract.events.EmployeeHiredEvent;
 import org.example.cardealershiprest.config.RabbitMQConfig;
 import org.example.cardealershiprest.model.Employee;
+import org.example.eventscontract.events.EmployeeHiredEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,6 @@ public class EmployeeService {
         );
         employees.add(e);
 
-        // 🔹 Отправляем событие EmployeeHiredEvent
         var event = new EmployeeHiredEvent(e.getId(), e.getFirstName(), e.getLastName(), e.getPosition());
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,

@@ -11,7 +11,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class EmployeeController implements EmployeeApi {
@@ -26,10 +27,7 @@ public class EmployeeController implements EmployeeApi {
 
     @Override
     public CollectionModel<EntityModel<EmployeeResponse>> getAllEmployees() {
-        var models = employeeService.getAllEmployees().stream()
-                .map(employeeAssembler::toModel)
-                .collect(Collectors.toList());
-        return employeeAssembler.toCollectionModel(models.stream().map(EntityModel::getContent).toList());
+        return employeeAssembler.toCollectionModel(employeeService.getAllEmployees());
     }
 
     @Override
@@ -45,7 +43,11 @@ public class EmployeeController implements EmployeeApi {
     }
 
     @Override
-    public StatusResponse deleteEmployee(Long id) {
-        return employeeService.deleteEmployee(id);
+    public ResponseEntity<EntityModel<StatusResponse>> deleteEmployee(Long id) {
+        StatusResponse status = employeeService.deleteEmployee(id);
+        var model = EntityModel.of(status,
+                linkTo(methodOn(EmployeeController.class).deleteEmployee(id)).withSelfRel(),
+                linkTo(methodOn(EmployeeController.class).getAllEmployees()).withRel("collection"));
+        return ResponseEntity.ok(model);
     }
 }
